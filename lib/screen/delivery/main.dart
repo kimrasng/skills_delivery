@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skills_delivery/screen/AppBar.dart';
 
 class DeliveryMain extends StatelessWidget {
   const DeliveryMain({super.key});
@@ -6,17 +7,7 @@ class DeliveryMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('배달', style: TextStyle(fontWeight: FontWeight.bold)),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipOval(
-              child: Image.network("https://i.namu.wiki/i/XJIgvkGTLB-5qUbu4GnWTsXsuLofCqi7-q33iZJaMyuCJYZD3oeMouxFGMMX_vs8Phr8s6knHJ2IfT4fiE9C0Q.webp"),
-            ),
-          )
-        ],
-      ),
+      appBar: CustomAppBar(title: "배달"),
       body:Container(
         margin: const EdgeInsets.all(8.0),
         child: SizedBox.expand(

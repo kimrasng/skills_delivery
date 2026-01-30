@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skills_delivery/screen/AppBar.dart';
 
 class OrderMain extends StatelessWidget {
   const OrderMain({super.key});
@@ -6,29 +7,13 @@ class OrderMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 70,
-        title: const Text('주문', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipOval(
-              child: SizedBox(
-                width: 46,
-                height: 46,
-                child: Image.network("https://i.namu.wiki/i/XJIgvkGTLB-5qUbu4GnWTsXsuLofCqi7-q33iZJaMyuCJYZD3oeMouxFGMMX_vs8Phr8s6knHJ2IfT4fiE9C0Q.webp"),
-              ),
-            ),
-          )
-        ],
-      ),
+      appBar: CustomAppBar(title: "주문"),
       body: Container(
         margin: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             _buildOrderButton(context),
-            _buildRecentOrdersTitle(context),
             _buildRecentOrdersCard(context),
           ],
         ),
@@ -62,16 +47,6 @@ class OrderMain extends StatelessWidget {
     );
   }
 
-  Widget _buildRecentOrdersTitle(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8.0, top: 16.0, bottom: 8.0),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text("최근 주문", style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold)),
-      ),
-    );
-  }
-
   Widget _buildRecentOrdersCard(BuildContext context) {
     final orders = [
       ("Cu", "얼박사, 신라면, 카스, 삼각김밥", "https://blog.kakaocdn.net/dna/tyZ4s/btqVzRA237b/AAAAAAAAAAAAAAAAAAAAAFn2os4BtUUb68-tpecCWKDgwyVyjOfl8bWDwr3emtfm/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1769871599&allow_ip=&allow_referer=&signature=fr6HlkLHrsxqIJiH%2FapAgaBLUdA%3D"),
@@ -79,18 +54,27 @@ class OrderMain extends StatelessWidget {
       ("Subway", "에그마요, 참치, 바비큐, 치킨 슬라이스", "https://www.pngall.com/wp-content/uploads/13/Subway-Logo-PNG-Image.png"),
     ];
 
-    return SizedBox(
-      width: MediaQuery.of(context).size.width - 20,
-      height: 300,
-      child: Card(
-        color: const Color(0xFFE9E9E9),
-        child: ListView.separated(
-          padding: const EdgeInsets.all(10),
-          itemCount: orders.length,
-          separatorBuilder: (_, __) => const SizedBox(height: 10),
-          itemBuilder: (_, index) => _buildOrderItem(context, orders[index]),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0, top: 16.0, bottom: 8.0),
+          child: Text("최근 주문", style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold)),
         ),
-      ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width - 20,
+          height: 300,
+          child: Card(
+            color: const Color(0xFFE9E9E9),
+            child: ListView.separated(
+              padding: const EdgeInsets.all(10),
+              itemCount: orders.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 10),
+              itemBuilder: (_, index) => _buildOrderItem(context, orders[index]),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
