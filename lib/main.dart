@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import './screen/delivery/main.dart';
+import './screen/order/main.dart';
 
 void main() => runApp(const NavigationBarApp());
 
@@ -24,7 +25,6 @@ class _NavigationExampleState extends State<NavigationExample> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -45,20 +45,8 @@ class _NavigationExampleState extends State<NavigationExample> {
         ],
       ),
       body: <Widget>[
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(child: Text('Home page', style: theme.textTheme.titleLarge)),
-          ),
-        ),
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(child: Text('딸배', style: theme.textTheme.titleLarge)),
-          ),
-        ),
+        OrderMain(),
+        DeliveryMain()
       ][currentPageIndex],
     );
   }
