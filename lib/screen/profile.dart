@@ -47,23 +47,44 @@ class Profile extends StatelessWidget {
   Widget _buildSettingsItem(BuildContext context) {
 
     final account = [
-      ("프로필 수정"),
-      ("로그아웃")
+      (Icons.edit,"프로필 수정"),
+      (Icons.logout,"로그아웃")
     ];
 
     final history = [
-      ("최근 주문 기록"),
-      ("최근 배달 기록")
+      (Icons.food_bank,"최근 주문 기록"),
+      (Icons.moped,"최근 배달 기록")
     ];
 
     return Column(
-
-
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 24.0, bottom: 8.0),
+          child: Text("계정", style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold)),
         ),
-        Column()
+        Column(
+          children: account.map((item) {
+            return ListTile(
+              leading: Icon(item.$1),
+              title: Text(item.$2),
+              onTap: () {},
+            );
+          }).toList(),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0, top: 24.0, bottom: 8.0),
+          child: Text("기록", style: Theme.of(context).textTheme.titleLarge!.copyWith(fontWeight: FontWeight.bold)),
+        ),
+        Column(
+          children: history.map((item) {
+            return ListTile(
+              leading: Icon(item.$1),
+              title: Text(item.$2),
+              onTap: () {},
+            );
+          }).toList(),
+        )
       ],
     );
   }
