@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skills_delivery/screen/AppBar.dart';
+import './orderHistory.dart';
 
 class OrderMain extends StatelessWidget {
   const OrderMain({super.key});
@@ -49,7 +50,7 @@ class OrderMain extends StatelessWidget {
 
   Widget _buildRecentOrdersCard(BuildContext context) {
     final orders = [
-      ("Cu", "얼박사, 신라면, 카스, 삼각김밥", "https://blog.kakaocdn.net/dna/tyZ4s/btqVzRA237b/AAAAAAAAAAAAAAAAAAAAAFn2os4BtUUb68-tpecCWKDgwyVyjOfl8bWDwr3emtfm/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1769871599&allow_ip=&allow_referer=&signature=fr6HlkLHrsxqIJiH%2FapAgaBLUdA%3D"),
+      ("Cu", "얼박사, 신라면, 카스, 삼각김밥", "https://play-lh.googleusercontent.com/dipiXa5mekfIkjxfIGz00vdupS7Mh_9m3LnwP393wBSNmwWQYW-1junU4LT--ZoEtgtM=w240-h480-rw"),
       ("Subway", "에그마요, 바비큐", "https://www.pngall.com/wp-content/uploads/13/Subway-Logo-PNG-Image.png"),
       ("Subway", "에그마요, 참치, 바비큐, 치킨 슬라이스", "https://www.pngall.com/wp-content/uploads/13/Subway-Logo-PNG-Image.png"),
     ];
@@ -66,11 +67,25 @@ class OrderMain extends StatelessWidget {
           height: 300,
           child: Card(
             color: const Color(0xFFE9E9E9),
-            child: ListView.separated(
-              padding: const EdgeInsets.all(10),
-              itemCount: orders.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemBuilder: (_, index) => _buildOrderItem(context, orders[index]),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.all(10),
+                    itemCount: orders.length,
+                    separatorBuilder: (_, __) => const SizedBox(height: 10),
+                    itemBuilder: (_, index) => _buildOrderItem(context, orders[index]),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  
+                  child: Text(
+                    "더보기",
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -92,12 +107,17 @@ class OrderMain extends StatelessWidget {
         ),
         const SizedBox(width: 20),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(order.$1, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20)),
-              Text(order.$2, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 10)),
-            ],
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const OrderHistory()));
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(order.$1, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, fontSize: 20)),
+                Text(order.$2, style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontSize: 10)),
+              ],
+            ),
           ),
         ),
       ],

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'detail/edit.dart';
+import 'detail/orderHistory.dart';
+import 'detail/deliveryHistory.dart';
+import 'detail/logout.dart';
+
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
@@ -39,7 +44,7 @@ class Profile extends StatelessWidget {
             ),
           ),
         ),
-        Text("원시인", style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+        Text("Test", style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
       ],
     );
   }
@@ -47,13 +52,13 @@ class Profile extends StatelessWidget {
   Widget _buildSettingsItem(BuildContext context) {
 
     final account = [
-      (Icons.edit,"프로필 수정"),
-      (Icons.logout,"로그아웃")
+      (Icons.edit,"프로필 수정", ProfileEdit()),
+      (Icons.logout,"로그아웃", Logout())
     ];
 
     final history = [
-      (Icons.food_bank,"최근 주문 기록"),
-      (Icons.moped,"최근 배달 기록")
+      (Icons.food_bank,"최근 주문 기록", OrderHistory()),
+      (Icons.moped,"최근 배달 기록", DeliveryHistory())
     ];
 
     return Column(
@@ -68,7 +73,9 @@ class Profile extends StatelessWidget {
             return ListTile(
               leading: Icon(item.$1),
               title: Text(item.$2),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => item.$3));
+              },
             );
           }).toList(),
         ),
@@ -81,7 +88,9 @@ class Profile extends StatelessWidget {
             return ListTile(
               leading: Icon(item.$1),
               title: Text(item.$2),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => item.$3));
+              },            
             );
           }).toList(),
         )
